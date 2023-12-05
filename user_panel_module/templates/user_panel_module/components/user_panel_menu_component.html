@@ -1,0 +1,47 @@
+<div class="panel-side">
+    <div class="content-box pb-0">
+        <div class="container-fluid">
+            <div class="panel-box">
+                <div class="d-flex align-items-center">
+                    <img src="/static/site/image/user-profile.png"
+                         class="img-fluid img-profile-panel rounded-circle me-3 shadow-md"
+                         alt="">
+                    <div class="d-grid gap-2">
+                        <h6 class="font-14 main-color-one-color">حساب کاربری من</h6>
+                        <h6 class="font-14">{{ request.user.mobile }} {{ request.user.last_name }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-box">
+                <nav class="navbar profile-box-nav">
+
+
+                    <ul class="navbar-nav flex-column">
+                        <li class="nav-item {% if request.path == user_panel_dashboard %} active {% endif %}">
+                            <a href="{% url 'user_panel_dashboard' %}" class="nav-link">
+                                <i class="bi bi-house-door"></i>پروفایل</a>
+                        </li>
+                        <li class="nav-item"><a href="{% url 'edit_profile_page' %}"
+                                                class="nav-link">
+                            <i class="bi bi-person-gear"></i>ویرایش اطلاعات</a>
+                        </li>
+                        <li class="nav-item"><a href="{% url 'user_shopping_page' %}"
+                                                class="nav-link">
+                            <i class="bi bi-cart-check"></i>سفارش های من <span
+                                class="badge rounded-pill badge-spn"></span></a>
+                        </li>
+                        <li class="nav-item"><a href="{% url 'change_password_page' %}"
+                                                class="nav-link">
+                            <i class="bi bi-person-fill-lock"></i>تغییر کلمه عبور<span
+                                class="badge rounded-pill badge-spn"></span></a>
+                        </li>
+                        <li class="nav-item"><a href="{% url 'logout_page' %}" class="nav-link">
+                            <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
+                        </li>
+                    </ul>
+
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<!--/category-productsr-->
+
+<ul class="level-one">
+    {% for category in categories %}
+        <li>
+            <a href="{% url 'product-categories-list' cat=category.url_title %}">{{ category.title }}</a>
+            {% if item.has_submenu %}
+                <ul class="level-two">
+                    {% for sub_item in item.submenu_items %}
+                        <li><a href="{{ sub_item.url }}">{{ sub_item.title }}</a></li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </li>
+    {% endfor %}
+    <li class="nav-item"><a href="{% url 'home_page' %}"
+                            class="nav-link border-animate fromCenter"><i class="bi bi-bag-heart"></i> خـانه
+    </a>
+    </li>
+    <li class="nav-item"><a href="{% url 'product-list' %}" class="nav-link border-animate fromCenter"> <i
+            class="bi bi-tag"></i>
+        محصولات</a></li>
+    <li class="nav-item"><a href="{% url 'contact_us_page' %}"
+                            class="nav-link border-animate fromCenter"><i class="bi bi-envelope"></i> تماس
+        با مـا
+    </a>
+    </li>
+</ul>

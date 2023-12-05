@@ -1,0 +1,115 @@
+{% extends 'shared/_layout.html' %}
+{% load thumbnail %}
+{% load render_partial %}
+
+{% block title %}لیست محصولات{% endblock %}
+
+{% block content %}
+
+    <!-- start content -->
+
+    <div class="content">
+        <div class="container-fluid">
+
+            <!-- start filter in mobile -->
+
+            <!-- end filter mobile -->
+
+            <div class="row gy-3">
+                <div class="col-lg-3 d-lg-block d-none">
+                    <div class="filter-items position-sticky top-0">
+                        <div class="container-fluid">
+                            <div class="filter-item">
+                                <h5 class="filter-item-title">جستجو</h5>
+                                <div class="filter-item-content">
+                                    <div class="search-form">
+                                        <form action="">
+                                            <div class="search-filed">
+                                                <input type="text" name="title" value="{{ request.GET.title }}"
+                                                       placeholder="جستجوی محصولات ..."
+                                                       class="form-control search-input">
+                                                <button type="submit"
+                                                        class="btn search-btn main-color-one-bg rounded-pill"><i
+                                                        class="bi bi-search"></i></button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="filter-item">
+                                <h5 class="filter-item-title">دسته بندی ها</h5>
+                                <div class="filter-item-content">
+                                    <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                                        <ul class="dropdown-menu">
+                                            <li><a for="colorCheck1" class="form-check" href="#">Regular link</a></li>
+                                            <li><a class="dropdown-item active" href="#" aria-current="true">Active
+                                                link</a>
+                                            </li>
+                                            <li><a class="dropdown-item" href="#">Another link</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            {#                            <div class="filter-item text-center">#}
+                            {#                                <a href="" class="btn-outline-site">اعمال فیلتر</a>#}
+                            {#                            </div>#}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-9">
+                    <div class="category-items">
+                        <div class="row g-3">
+                            {% for product in products %}
+                                {% include 'includes/product_item_partial.html' with product=product %}
+                            {% endfor %}
+                            <div class="col-12">
+                                <div class="my-paginate my-4">
+                                    <nav aria-label="Page navigation example">
+                                        <ul class="pagination flex-wrap justify-content-center">
+                                            {% if page_obj.has_previous %}
+                                                <li class="page-item">
+                                                    <a class="page-link rounded-3" href="?page=1">اولین</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link rounded-3"
+                                                       href="?page={{ page_obj.previous_page_number }}">قبلی</a>
+                                                </li>
+                                            {% endif %}
+
+                                            {% for num in page_obj.paginator.page_range %}
+                                                <li class="page-item {% if page_obj.number == num %}active{% endif %}">
+                                                    <a class="page-link rounded-3" href="?page={{ num }}">{{ num }}</a>
+                                                </li>
+                                            {% endfor %}
+
+                                            {% if page_obj.has_next %}
+                                                <li class="page-item">
+                                                    <a class="page-link rounded-3"
+                                                       href="?page={{ page_obj.next_page_number }}">بعدی</a>
+                                                </li>
+                                                <li class="page-item">
+                                                    <a class="page-link rounded-3"
+                                                       href="?page={{ page_obj.paginator.num_pages }}">آخرین</a>
+                                                </li>
+                                            {% endif %}
+                                        </ul>
+                                    </nav>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function filterProducts() {
+            const filterPrice = $('#sl2').val();
+            const start_price = filterPrice.split(',')[0];
+            const end_price = filterPrice.split(',')[1];
+            $('#start_price').val(start_price);
+            $('#end_price').val(end_price);
+            $('#filter_form').submit();
+        }</script>
+    <!-- end content -->
+{% endblock %}

@@ -1,0 +1,139 @@
+{% load render_partial %}
+<!DOCTYPE html>
+<html lang="FA-IR" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="/static/site/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="/static/site/font/bootstrap-icon/bootstrap-icons.css">
+    <link rel="stylesheet" href="/static/site/plugin/waves/waves.min.css">
+    <link rel="stylesheet" href="/static/site/plugin/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="/static/site/plugin/timer/timer.css">
+    <link rel="stylesheet" href="/static/site/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css">
+    <link rel="stylesheet" href="/static/site/css/style.css">
+    <link rel="stylesheet" href="/static/site/css/responsive.css">
+    <!-- ======== range slider -->
+    <link rel="stylesheet" href="/static/site/plugin/bootstrap-slider/bootstrap-slider.min.css">
+    <!-- ======== range slider -->
+</head>
+
+<body>
+
+{% block header %}
+{% endblock %}
+{% render_partial 'home_module.views.site_header_component' %}
+<!-- start breadcroumb -->
+
+<!--<div class="bread-crumb pt-3">-->
+<!--    <div class="container-fluid">-->
+<!--        <div class="content-box">-->
+<!--            <div class="container-fluid">-->
+<!--                <nav aria-label="breadcrumb" class="my-lg-0 my-2">-->
+<!--                    <ol class="breadcrumb mb-0">-->
+<!--                        <li class="breadcrumb-item"><a href="#" class="font-14 text-muted">خانه</a></li>-->
+<!--                        <li class="breadcrumb-item"><a href="#" class="font-14 text-muted">فروشگاه</a></li>-->
+<!--                        <li class="breadcrumb-item"><a href="#" class="font-14 text-muted">گوشی هوشمند</a></li>-->
+<!--                        <li class="breadcrumb-item active main-color-one-color font-14" aria-current="page">گوشی شیائومی-->
+<!--                        </li>-->
+<!--                    </ol>-->
+<!--                </nav>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+<!--</div>-->
+
+<!-- end breadcroumb -->
+
+<!-- start content -->
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="content-box">
+            <div class="container-fluid">
+                <p class="mb-0">
+                    {% block content %}
+                    {% endblock %} </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- end content -->
+
+{% render_partial 'home_module.views.site_footer_component' %}
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/static/site/js/jquery.min.js"></script>
+<script src="/static/site/js/bootstrap.bundle.min.js"></script>
+<script src="/static/site/plugin/waves/waves.min.js"></script>
+<script src="/static/site/plugin/swiper/swiper-bundle.min.js"></script>
+<script src="/static/site/plugin/timer/timer.js"></script>
+<script src="/static/site/plugin/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+<script src="/static/site/js/app.js"></script>
+<script src="/static/site/js/jquery-app.js"></script>
+
+<!-- ===== start new update -->
+<script src="/static/site/plugin/go-to-top/script.js"></script>
+<script src="/static/site/plugin/rasta-contact/script.js"></script>
+
+<link rel="stylesheet" href="/static/site/plugin/go-to-top/style.css">
+<link rel="stylesheet" href="/static/site/plugin/rasta-contact/style.css">
+
+<script>
+    //// config floating contact
+    $('#btncollapzion').Collapzion({
+        _child_attribute: [{
+            'label': 'پشتیبانی تلفنی',
+            'url': 'tel:0930555555555',
+            'icon': 'bi bi-telephone'
+        },
+            {
+                'label': 'پشتیبانی تلگرام',
+                'url': 'https://tlgrm.me',
+                'icon': 'bi bi-telegram'
+            },
+            {
+                'label': 'پشتیبانی واتس آپ',
+                'url': 'https://wa.me/444444444',
+                'icon': 'bi-whatsapp'
+            },
+
+        ],
+    });
+</script>
+
+<script src="/static/site/js/custom.js"></script>
+<!-- ==== range slider -->
+<script src="/static/site/plugin/bootstrap-slider/bootstrap-slider.min.js"></script>
+<script>
+    $(document).ready(function () {
+        ////slider range
+        $(".catRange").slider({
+            id: "slider5b",
+            min: 1500000,
+            max: 3000000,
+            range: true,
+            step: 10000,
+            value: [1500000, 3000000],
+            rtl: 'false',
+            formatter: function formatter(val) {
+                if (Array.isArray(val)) {
+                    return val[0] + " تومان " + "  تا   " + val[1] + " تومان ";
+                } else {
+                    return val;
+                }
+            },
+        });
+    });
+</script>
+
+
+{% block extra_footer_references %}
+
+{% endblock %}
+</body>
+
+</html>

@@ -1,0 +1,154 @@
+{% load poll_extras %}
+
+<!-- start content -->
+
+<div class="content">
+    <div class="container-fluid">
+    </div>
+
+    <div class="container-fluid">
+        <div class="cart-product">
+            <div class="row gy-4">
+                <div class="col-lg-9">
+                    {% for detail in order.orderdetail_set.all %}
+
+                        <div class="cart-product-item">
+                            <div class="content-box">
+                                <div class="container-fluid">
+                                    <div class="cart-items">
+                                        <div class="item">
+                                            <div class="row gy-2">
+                                                <div class="col-2 w-100-in-400">
+                                                    <div class="image">
+                                                        <img src="{{ detail.product.image.url }}" alt=""
+                                                             class="img-fluid">
+                                                    </div>
+                                                </div>
+                                                <div class="col-10 w-100-in-400">
+                                                    <div class="d-flex justify-content-between align-items-start">
+                                                        <div class="d-flex align-items-start flex-column me-2">
+                                                            <div class="title d-flex align-items-center flex-wrap">
+                                                                <h6 class="font-16">{{ detail.product.title }}<span
+                                                                        class="badge ms-2 danger-label rounded-pill"></span>
+                                                                </h6>
+                                                            </div>
+                                                            <div class="cart-item-feature d-flex align-items-center flex-wrap mt-3">
+                                                                <div class="item d-flex align-items-center">
+                                                                    <div class="icon"><i class="bi bi-palette2"></i>
+                                                                    </div>
+                                                                    <div class="saller-name mx-2">
+                                                                        رنگ:
+                                                                    </div>
+                                                                    <div class="saller-name text-muted">
+                                                                        <div class="product-meta-color-items mt-0">
+                                                                            <label class="btn-light mb-0 px-2 py-1"
+                                                                                   for="option1">
+                                                                                <span></span>
+                                                                                {{ detail.product.color }}
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="item d-flex align-items-center">
+                                                                    <div class="icon"><i
+                                                                            class="bi bi-bounding-box-circles"></i>
+                                                                    </div>
+                                                                    <div class="saller-name mx-2">شناسـه :</div>
+                                                                    <div class="saller-name text-muted">
+                                                                        <div class="product-meta-color-items mt-0">
+                                                                            <label class="btn-light px-2 mb-0"
+                                                                                   for="option1">
+                                                                                {{ detail.product.id }}
+                                                                            </label>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="remove danger-label">
+                                                            <a class="cart_quantity_delete"
+                                                               onclick="removeOrderDetail({{ detail.id }})">
+                                                                <i class="bi bi-trash-fill font-25"></i>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="action d-flex flex-wrap justify-content-sm-end justify-content-center align-items-center mt-3">
+                                                        <div class="cart-item-feature d-flex align-items-center flex-wrap">
+                                                            <div class="item d-flex align-items-center">
+                                                                <p class="mb-0 new-price font-16">{{ detail.product.price|three_digits_currency }}</p>
+                                                            </div>
+                                                        </div>
+                                                        <div class="counter">
+                                                            <input type="text" name="count" class="counter"
+                                                                   value="{{ detail.count }}">
+                                                            <a class="cart_quantity_up cursor-pointer"
+                                                               onclick="changeOrderDetailCount({{ detail.id }}, 'increase')">
+                                                            </a>
+                                                            <a onclick="changeOrderDetailCount({{ detail.id }}, 'decrease')"></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+                <div class="col-lg-3">
+                    <div class="cart-canvases position-sticky top-0">
+                        <div class="item">
+                            <div class="factor">
+                                <div class="title">
+                                    <div class="d-flex align-items-center">
+                                        <img src="assets/image/shopping-bag.png" class="img-fluid" alt="">
+                                        <h6 class="font-16">سفارش شما</h6>
+                                    </div>
+                                </div>
+                                <div class="d-flex mb-3 align-items-center justify-content-between">
+                                    <p class="fw-bold mb-0">محصول</p>
+                                    <p class="fw-bold mb-0">قیمت کل</p>
+                                </div>
+                                {% for detail in order.orderdetail_set.all %}
+                                    <div class="factor-item p-2 rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-between">
+                                        <p class="mb-0">{{ detail.product.title }}</p>
+                                        <p class="mb-0">{{ detail.product.price|three_digits_currency }}</p>
+                                    </div>
+                                {% endfor %}
+                                <div class="factor-item p-2 rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 fw-bold">تخفیف:</p>
+                                    <p class="mb-0">0 تومان</p>
+                                </div>
+                                <div
+                                        class="factor-item p-2 rounded-3 shadow-sm bg-light d-flex align-items-center justify-content-between">
+                                    <p class="mb-0 fw-bold">جمع کل:</p>
+                                    <p class="mb-0">{{ sum|three_digits_currency }}</p>
+                                </div>
+                                <div class="action mt-3 d-flex align-items-center justify-content-center">
+                                    <a href="{% url 'request_payment' %}"
+                                       class="btn border-0 main-color-one-bg rounded-3 d-block w-100">تسویه
+                                        حساب</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{#{% else %}#}
+{#<div class="container">#}
+{#    <div class="row">#}
+{#        <div class="col-md-12">#}
+{#            <div class="alert alert-warning">#}
+{#                <p>سبد خرید شما خالی می باشد</p>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{#{% endif %}#}
+<!-- end content -->

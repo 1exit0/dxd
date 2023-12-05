@@ -1,0 +1,129 @@
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
+
+{% block title %}
+    ویرایش اطلاعات کاربری
+{% endblock %}
+
+{% block content %}
+
+    <div class="dashboard-panel">
+        <div class="row gy-3">
+            <div class="col-lg-3 d-lg-block d-none">
+
+                {% render_partial 'user_panel_module.views.user_panel_menu_component' %}
+
+            </div>
+            <div class="col-lg-9">
+                <div class="content-box">
+                    <div class="container-fluid">
+                        <form action="{% url 'edit_profile_page' %}" method="post">
+                            {% csrf_token %}
+                            <div class="form-group title-panel">
+                                <h6 class="font-16">
+                                    ویرایش اطلاعات کاربری
+                                </h6>
+                            </div>
+                            <div class="form-group">
+                                {{ form.as_p }}
+
+                                {#                                <div class="row">#}
+                                {#                                    <div class="col-md-6">#}
+                                {#                                        <div class="form-floating mb-3">#}
+                                {#                                            {{ current_user.first_name }}#}
+                                {#                                            {{ register_form.first_name.error }}#}
+                                {#                                            <label for="floatingInputFname">نام خود را وارد کنید</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="col-md-6">#}
+                                {#                                        <div class="form-floating mb-3">#}
+                                {#                                            {{ register_form.last_name }}#}
+                                {#                                            {{ register_form.last_name.error }}#}
+                                {#                                            <label for="floatingInputLname">نام خانوادگی خود را وارد#}
+                                {#                                                کنید</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+                                {#                            </div>#}
+                                {#                            <div class="form-floating mb-3">#}
+                                {#                                {{ register_form.address }}#}
+                                {#                                {{ register_form.address.error }}#}
+                                {#                                <label for="floatingInputStreet">آدرس</label>#}
+                                {#                            </div>#}
+                                {#                            <div class="form-floating mb-3">#}
+                                {#                                {{ register_form.mobile }}#}
+                                {#                                {% if register_form.phone_number.errors %}#}
+                                {#                                    <ul>#}
+                                {#                                        {% for error in register_form.phone_number.errors %}#}
+                                {#                                            <p style="color: red">*{{ error }}</p>#}
+                                {#                                        {% endfor %}#}
+                                {#                                    </ul>#}
+                                {#                                {% endif %}#}
+                                {#                                <label for="floatingInputMobile">تلفن همراه</label>#}
+                                {#                            </div>#}
+                                {#                            <div class="form-group">#}
+                                {#                                <div class="row">#}
+                                {#                                    <div class="col-md-6">#}
+                                {#                                        <div class="form-floating mb-3">#}
+                                {#                                            {{ register_form.email }}#}
+                                {#                                            {{ register_form.email.error }}#}
+                                {#                                            <label for="floatingInputFname">ایمیل خود را وارد کنید</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="col-md-6">#}
+                                {#                                        <div class="form-floating mb-3">#}
+                                {#                                            {{ register_form.national_code }}#}
+                                {#                                            {% if register_form.national_code.errors %}#}
+                                {#                                                <ul>#}
+                                {#                                                    {% for error in register_form.national_code.errors %}#}
+                                {#                                                        <li style="color: red">{{ error }}</li>#}
+                                {#                                                    {% endfor %}#}
+                                {#                                                </ul>#}
+                                {#                                            {% endif %}#}
+                                {#                                            <label for="floatingInputLname">کد ملی خود را وارد کنید</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {##}
+                                {#                                </div>#}
+                                {#                            </div>#}
+                                {#                            <div class="form-group">#}
+                                {#                                <div class="row">#}
+                                {#                                    <div class="col-md-6">#}
+                                {#                                        <div class="form-floating mb-3">#}
+                                {#                                            {{ register_form.password }}#}
+                                {#                                            {{ register_form.password.error }}#}
+                                {#                                            <label for="floatingInputFname"> کلمه عبور خود را وارد کنید</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                    <div class="col-md-6">#}
+                                {#                                        <div class="form-floating mb-3">#}
+                                {#                                            {{ register_form.confirm_password }}#}
+                                {#                                            {% if register_form.confirm_password.errors %}#}
+                                {#                                                <ul>#}
+                                {#                                                    {% for error in register_form.confirm_password.errors %}#}
+                                {#                                                        <p style="color: red">*{{ error }}</p>#}
+                                {#                                                    {% endfor %}#}
+                                {#                                                </ul>#}
+                                {#                                            {% endif %}#}
+                                {#                                            <label for="floatingInputLname">تکرار کلمه عبور عبور خود را وارد#}
+                                {#                                                کنید</label>#}
+                                {#                                        </div>#}
+                                {#                                    </div>#}
+                                {#                                </div>#}
+                                {#                            </div>#}
+                                {#                            <div class="mb-2">#}
+                                <button type="submit"
+                                        class="btn border-0 main-color-one-bg waves-effect waves-light py-2 px-5"><i
+                                        class="bi bi-pencil-square text-white me-1"></i>ثبت
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- end content -->
+{% endblock %}

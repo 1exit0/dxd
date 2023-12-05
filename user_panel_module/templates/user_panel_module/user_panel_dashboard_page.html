@@ -1,0 +1,89 @@
+{% extends 'shared/_layout.html' %}
+{% load render_partial %}
+
+{% block title %}
+    داشبورد
+{% endblock %}
+
+{% block content %}
+    <!-- start content -->
+    <div class="content">
+        <div class="container-fluid">
+
+            <!-- start side-menu in mobile -->
+            <div class="custom-filter d-lg-none d-block">
+                <button class="btn btn-filter-float border-0 main-color-two-bg shadow-box px-4 rounded-3 position-fixed"
+                        style="z-index: 999;bottom:80px;" type="button" data-bs-toggle="offcanvas"
+                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                    <i class="bi bi-list font-20 fw-bold text-white"></i>
+                    <span class="d-block font-14 text-white">منو</span>
+                </button>
+
+                <div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasRight"
+                     aria-labelledby="offcanvasRightLabel">
+                    <div class="offcanvas-header">
+                        <h5 class="offcanvas-title" id="offcanvasRightLabel">منو</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div class="offcanvas-body">
+                        <div class="panel-side">
+                            <div class="content-box pb-0">
+                                <div class="container-fluid">
+                                    <div class="panel-box">
+                                        <div class="d-flex align-items-center">
+                                            <img src="/static/site/image/user.png"
+                                                 class="img-fluid img-profile-panel rounded-circle me-3 shadow-md"
+                                                 alt="">
+                                            <div class="d-grid gap-2">
+                                                <h6 class="font-14 main-color-one-color">حساب کاربری من</h6>
+                                                <h6 class="font-14">{{ request.user.mobile }} {{ request.user.last_name }}</h6>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="profile-box">
+                                        <nav class="navbar profile-box-nav">
+                                            <ul class="navbar-nav flex-column">
+                                                <li class="nav-item active"><a href="{% url 'edit_profile_page' %}"
+                                                                               class="nav-link">
+                                                    <i class="bi bi-house-door"></i>ویرایش اطلاعات</a>
+                                                </li>
+                                                <li class="nav-item"><a href="{% url 'user_shopping_page' %}"
+                                                                        class="nav-link">
+                                                    <i class="bi bi-cart-check"></i>سفارش های من <span
+                                                        class="badge rounded-pill badge-spn">5</span></a>
+                                                </li>
+                                                <li class="nav-item"><a href="{% url 'change_password_page' %}"
+                                                                        class="nav-link">
+                                                    <i class="bi bi-person-fill-lock"></i>تغییر کلمه عبور<span
+                                                        class="badge rounded-pill badge-spn">5</span></a>
+                                                </li>
+                                                <li class="nav-item"><a href="{% url 'logout_page' %}" class="nav-link">
+                                                    <i class="bi bi-arrow-right-square"></i>خروج از حساب کاربری</a>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- end side-menu in mobile -->
+
+            <div class="dashboard-panel">
+                <div class="row gy-3">
+                    <div class="col-lg-3 d-lg-block d-none">
+
+                        {% render_partial 'user_panel_module.views.user_panel_menu_component' %}
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- end content -->
+{% endblock %}

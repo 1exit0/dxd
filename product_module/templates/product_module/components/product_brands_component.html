@@ -1,0 +1,24 @@
+<div class="filter-item">
+    <h5 class="filter-item-title">دسته بندی ها</h5>
+    <div class="filter-item-content">
+        <ul class="nav nav-pills nav-stacked">
+            {% for brand in brands %}
+                <div class="d-flex align-items-center justify-content-between flex-wrap mb-3">
+                    <div class="form-check">
+                        <li>
+                            <label for="colorCheck11" class="form-check-label">
+                                <a href="{% url 'product-list-by-brands' brand=brand.url_title %}">
+                                    {{ brand.title }}</a><i class="bi bi-archive"></i>
+
+                            </label>
+                        </li>
+                    </div>
+                    <div>
+                        <span class="fw-bold font-14">({{ brand.products_count }})</span>
+                    </div>
+                </div>
+
+            {% endfor %}
+        </ul>
+    </div>
+</div>
